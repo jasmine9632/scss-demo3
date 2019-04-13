@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@mixin buttonWithShadow ($color) {
+    background: $color;
+    box-shadow: 0px 5px 0px 0px darken($color, 15%);
+}
+
+.buttonWrapper {
+    button {
+        padding: 10px 20px;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        font-size: 20px;
+        margin: 0 40px;
+        &:first-child {
+            $blue: #55acee;
+            @include buttonWithShadow($blue);
+            &:hover {
+                animation-duration: 0.5s;
+                animation-name: x;
+            }
+        }
+        &:nth-child(2) {
+            $green: #2ecc71;
+            @include buttonWithShadow($green);
+            &:hover {
+                animation-duration: 0.5s;
+                animation-name: y;
+            }
+        }
+    }
+}
+
+$n:10%;
+$step:25%;
+@keyframes x {
+    @for $i from 0 to 4 {
+        #{$i * $step} {
+            @if $i % 2==0 {
+                transform: translateX(-$n);
+            }
+            @else {
+                transform: translateX($n);
+            }
+        }
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes y {
+    @for $i from 0 to 4 {
+        #{$i * $step} {
+            @if $i % 2==0 {
+                transform: translateY(-$n);
+            }
+            @else {
+                transform: translateY($n);
+            }
+        }
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
